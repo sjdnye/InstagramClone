@@ -16,7 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.instagramclone.R
-import com.example.instagramclone.presentation.Authentication.AuthenticationViewModel
+import com.example.instagramclone.presentation.authentication.AuthenticationViewModel
 import com.example.instagramclone.utils.Screens
 import kotlinx.coroutines.delay
 

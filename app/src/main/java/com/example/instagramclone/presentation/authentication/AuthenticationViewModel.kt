@@ -1,14 +1,12 @@
-package com.example.instagramclone.presentation.Authentication
+package com.example.instagramclone.presentation.authentication
 
 import androidx.compose.runtime.State
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.instagramclone.domain.use_case.user_authentication.AuthenticationUseCases
 import com.example.instagramclone.utils.Response
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

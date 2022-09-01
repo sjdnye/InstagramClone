@@ -19,7 +19,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
     private val firestore: FirebaseFirestore
 ) : AuthenticationRepository {
 
-    var operationSuccessful: Boolean = false
+    private var operationSuccessful: Boolean = false
 
     override fun isUserAuthenticatedInFirebase(): Boolean {
         return auth.currentUser != null
@@ -69,24 +69,23 @@ class AuthenticationRepositoryImpl @Inject constructor(
             emit(Response.Loading)
             auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener {
                 operationSuccessful = true
-            }.addOnFailureListener{
+            }.addOnFailureListener {
                 operationSuccessful = false
             }.await()
 
-            if (operationSuccessful){
+            if (operationSuccessful) {
                 val userId = auth.currentUser?.uid!!
-                val user = User(userName = userName, email = email, password = password, userid = userId)
-                firestore.collection(COLLECTION_NAME_USERS).document(userId).set(user).addOnSuccessListener {
+                val user =
+                    User(userName = userName, email = email, password = password, userid = userId)
+                firestore.collection(COLLECTION_NAME_USERS).document(userId).set(user)
+                    .addOnSuccessListener {
 
-                }.await()
+                    }.await()
                 emit(Response.Success(operationSuccessful))
-            }else{
+            } else {
                 emit(Response.Success(operationSuccessful))
 
             }
-
-
-
         } catch (e: Exception) {
             emit(Response.Error(e.localizedMessage ?: "An Unexpected Error!"))
         }
